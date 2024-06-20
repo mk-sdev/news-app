@@ -1,69 +1,92 @@
-import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Dimensions,
+} from 'react-native'
 import React, { useEffect, useState } from 'react'
-import GlobalApi from '@/Services/GlobalApi';
+import GlobalApi from '@/Services/GlobalApi'
 
 export default function TopHeadlineSlider() {
   const [newsList, setNewsList] = useState([])
+
   useEffect(() => {
     getTopHeadline()
-  }, []);
+  }, [])
 
-  const getTopHeadline = async ()=>{
-    const result = (await GlobalApi.getTopHeadline).data
-    // console.log(result)
-    setNewsList(result.articles) 
+  const getTopHeadline = async () => {
+    try {
+      const result = (await GlobalApi.getTopHeadline).data
+      setNewsList(result.articles)
+    } catch (e) {
+      console.error('Error fetching top headlines:', e)
+    }
   }
 
   useEffect(() => {
     console.log(newsList)
-  }, [newsList]);
+  }, [newsList])
 
-    const renderItem = ({ item }) => {
-    // Warunkowe renderowanie w zależności od istnienia urlToImage
+  const renderItem = ({ item }) => {
     return item.urlToImage ? (
       <TouchableOpacity style={styles.itemContainer}>
-        <Image
-          style={styles.image}
-          source={{ uri: item.urlToImage }}
-        />
-        <Text style={styles.text}>{item.title}</Text>
+        <Image style={styles.image} source={{ uri: item.urlToImage }} />
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>{item.title}</Text>
+        </View>
       </TouchableOpacity>
-    ) : (
-      null
-    );
-  };
+    ) : null
+  }
 
   return (
-    <View style={{backgroundColor: 'red', width: '100%'}}>
+    <View style={styles.container}>
       <FlatList
-      horizontal
+        horizontal
+        showsHorizontalScrollIndicator={false}
         data={newsList}
-        // contentContainerStyle={{height: 500}}
         renderItem={renderItem}
-      ></FlatList>
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    marginTop: 10,
+    marginLeft: 10,
   },
   itemContainer: {
-    flexDirection: 'row',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    alignItems: 'center', // Dostosowanie elementów do linii
+    width: Dimensions.get('window').width * 0.8,
+    height: 200,
+    backgroundColor: 'transparent', // No background color for the container
+    marginRight: 15,
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   image: {
-    height: 100,
-    width: 100,
-    marginRight: 10,
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
+  },
+  textContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   text: {
-    flex: 1, // Aby tekst zajął resztę dostępnego miejsca
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
     flexWrap: 'wrap',
   },
 })
