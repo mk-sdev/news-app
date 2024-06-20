@@ -21,7 +21,7 @@ export default function CategoryTextSlider() {
         showsHorizontalScrollIndicator={false}
         data={categoryList}
         keyExtractor={item => item.id.toString()}
-        contentContainerStyle={{width: '100%'}}
+        // contentContainerStyle={{width: '100%'}}
         renderItem={({ item }) => (
           <Pressable onPress={() => setActive(item.id)}>
             <Text
