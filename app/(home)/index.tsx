@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CategoryTextSlider from '@/components/home/CategoryTextSlider'
@@ -19,6 +19,7 @@ export default function Index() {
       try {
         const result = (await GlobalApi.getTopHeadline).data
         setNewsList(result.articles)
+        console.log(result.articles)
       } catch (e) {
         console.error('Error fetching top headlines:', e)
       }
@@ -30,8 +31,11 @@ export default function Index() {
         <Entypo name="bell" size={24} color="black" />
       </View>
       <CategoryTextSlider />
+      <ScrollView>
+
       <TopHeadlineSlider newsList={newsList} />
       <HeadlineList newsList={newsList} />
+      </ScrollView>
     </SafeAreaView>
   )
 }

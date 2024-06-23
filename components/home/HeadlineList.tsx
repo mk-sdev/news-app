@@ -30,7 +30,7 @@ export default function HeadlineList({ newsList }) {
   return (
     <View style={styles.container}>
       <FlatList
-        showsVerticalScrollIndicator={false}
+        // showsVerticalScrollIndicator={false}
         data={newsList}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
@@ -47,18 +47,18 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: Dimensions.get('window').width * 0.9,
+    width: '100%',
     height: 100,
     backgroundColor: 'white',
-    marginBottom: 15,
+    marginBottom: 5,
     borderRadius: 10,
     overflow: 'hidden',
     padding: 10,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
-    elevation: 5,
+    elevation: 1,
   },
   image: {
     width: 80,

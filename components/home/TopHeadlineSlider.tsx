@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import GlobalApi from '@/Services/GlobalApi'
+import { useRouter } from 'expo-router'
 
 export default function TopHeadlineSlider({newsList}) {
 
@@ -17,16 +18,26 @@ export default function TopHeadlineSlider({newsList}) {
   // useEffect(() => {
   //   console.log(newsList)
   // }, [newsList])
+  const router = useRouter()
 
   const renderItem = ({ item }) => {
     return item.urlToImage ? (
-      <TouchableOpacity style={styles.itemContainer}>
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() =>
+          router.push(
+            `/Article?title=${item.title}&image=${item.urlToImage}&content=${item.content}`
+          )
+        }
+      >
         <Image style={styles.image} source={{ uri: item.urlToImage }} />
         <View style={styles.textContainer}>
           <Text style={styles.text}>{item.title}</Text>
         </View>
       </TouchableOpacity>
-    ) : <Text>s</Text>
+    ) : (
+      <Text>s</Text>
+    )
 
   }
 
@@ -38,6 +49,7 @@ export default function TopHeadlineSlider({newsList}) {
         data={newsList}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
+        // contentContainerStyle={{height: '100%'}}
       />
     </View>
   )
