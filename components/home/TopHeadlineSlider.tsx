@@ -10,25 +10,13 @@ import {
 import React, { useEffect, useState } from 'react'
 import GlobalApi from '@/Services/GlobalApi'
 
-export default function TopHeadlineSlider() {
-  const [newsList, setNewsList] = useState([])
+export default function TopHeadlineSlider({newsList}) {
 
-  useEffect(() => {
-    getTopHeadline()
-  }, [])
 
-  const getTopHeadline = async () => {
-    try {
-      const result = (await GlobalApi.getTopHeadline).data
-      setNewsList(result.articles)
-    } catch (e) {
-      console.error('Error fetching top headlines:', e)
-    }
-  }
 
-  useEffect(() => {
-    console.log(newsList)
-  }, [newsList])
+  // useEffect(() => {
+  //   console.log(newsList)
+  // }, [newsList])
 
   const renderItem = ({ item }) => {
     return item.urlToImage ? (
@@ -38,7 +26,8 @@ export default function TopHeadlineSlider() {
           <Text style={styles.text}>{item.title}</Text>
         </View>
       </TouchableOpacity>
-    ) : null
+    ) : <Text>s</Text>
+
   }
 
   return (
