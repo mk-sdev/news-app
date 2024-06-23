@@ -46,7 +46,7 @@ export default function TopHeadlineSlider({newsList}) {
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
-    marginLeft: 10,
+    marginLeft: 10, 
   },
   itemContainer: {
     width: Dimensions.get('window').width * 0.8,
