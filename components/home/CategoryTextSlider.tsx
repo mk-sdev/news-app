@@ -2,7 +2,7 @@ import { View, Text, FlatList, Pressable, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { Colors } from '@/constants/Colors' // Ensure this path and import are correct
 
-export default function CategoryTextSlider() {
+export default function CategoryTextSlider({selectCategory}) {
   const [active, setActive] = useState(1)
 
   const categoryList = [
@@ -23,7 +23,9 @@ export default function CategoryTextSlider() {
         keyExtractor={item => item.id.toString()}
         // contentContainerStyle={{width: '100%'}}
         renderItem={({ item }) => (
-          <Pressable onPress={() => setActive(item.id)}>
+          <Pressable onPress={() => {setActive(item.id)
+          selectCategory(item.name)
+          }}>
             <Text
               style={
                 item.id === active ? styles.selectText : styles.unselectText

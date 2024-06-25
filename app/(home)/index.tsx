@@ -12,12 +12,13 @@ export default function Index() {
   const [newsList, setNewsList] = useState([])
 
     useEffect(() => {
-      getTopHeadline()
+      // getTopHeadline()
+      getNewsByCategory('latest')
     }, [])
 
-    const getTopHeadline = async () => {
+    const getNewsByCategory = async (cat:string) => {
       try {
-        const result = (await GlobalApi.getTopHeadline).data
+        const result = (await GlobalApi.getByCategory(cat)).data
         setNewsList(result.articles)
         console.log(result.articles)
       } catch (e) {
@@ -30,7 +31,7 @@ export default function Index() {
         <Text style={styles.appName}>News</Text>
         <Entypo name="bell" size={24} color="black" />
       </View>
-      <CategoryTextSlider />
+      <CategoryTextSlider selectCategory={(category:string)=>getNewsByCategory(category)} />
       <ScrollView>
 
       <TopHeadlineSlider newsList={newsList} />

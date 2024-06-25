@@ -11,4 +11,9 @@ const apiKey = '?country=us&apiKey=87bc66d4570d4b819cb5c2f5ffefa162'
 
 const getTopHeadline = api.get('/top-headlines'+apiKey)
 
-export default {getTopHeadline}
+const getByCategory = (category: string) =>
+  api.get(
+    '/everything?q=' + category + '&apiKey=87bc66d4570d4b819cb5c2f5ffefa162'
+  )
+
+export default {getTopHeadline, getByCategory}
