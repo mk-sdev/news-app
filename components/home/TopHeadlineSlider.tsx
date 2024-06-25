@@ -26,7 +26,7 @@ export default function TopHeadlineSlider({newsList}) {
         style={styles.itemContainer}
         onPress={() =>
           router.push(
-            `/Article?title=${item.title}&image=${item.urlToImage}&content=${item.content}`
+            `/Article?title=${item.title}&image=${item.urlToImage}&content=${item.content}&url=${item.url}`
           )
         }
       >

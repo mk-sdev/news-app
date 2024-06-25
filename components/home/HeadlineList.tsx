@@ -8,22 +8,40 @@ import {
   StyleSheet,
 } from 'react-native'
 import React from 'react'
+import { useRouter } from 'expo-router'
 
 export default function HeadlineList({ newsList }) {
+
+  const router = useRouter()
+
   const renderItem = ({ item }) => {
     return item.urlToImage ? (
-      <TouchableOpacity style={styles.itemContainer}>
+      <TouchableOpacity style={styles.itemContainer}
+              onPress={() =>
+          router.push(
+            `/Article?title=${item.title}&image=${item.urlToImage}&content=${item.content}&url=${item.url}`
+          )
+        }
+      >
         <Image style={styles.image} source={{ uri: item.urlToImage }} />
         <View style={styles.textContainer}>
           <Text style={styles.text}>{item.title}</Text>
         </View>
       </TouchableOpacity>
     ) : (
-      <View style={styles.itemContainer}>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>{item.title}</Text>
+      <TouchableOpacity style={styles.itemContainer}
+              onPress={() =>
+          router.push(
+            `/Article?title=${item.title}&image=${item.urlToImage}&content=${item.content}&url=${item.url}`
+          )
+        }
+      >
+        <View style={styles.itemContainer}>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>{item.title}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 
