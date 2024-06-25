@@ -40,7 +40,7 @@ export default function Index() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text style={styles.appName}>News</Text>
         <Entypo name="bell" size={24} color="black" />
       </View>
