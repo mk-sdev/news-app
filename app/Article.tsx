@@ -15,7 +15,7 @@ import { Entypo } from '@expo/vector-icons'
 // import { Share } from 'expo-sharing'
 
 export default function ArticleScreen() {
-  const { title, image, content, url } = useLocalSearchParams()
+  const { title, image, content, url, author, publishedAt } = useLocalSearchParams()
   const removeLastChars = str => {
     if (str.length > 15) {
       return str.slice(0, -15)
@@ -46,10 +46,13 @@ export default function ArticleScreen() {
         style={{
           width: '90%',
           backgroundColor: 'transparent',
-          flexDirection: 'row-reverse',
-          marginTop: 5
+          flexDirection: 'row',
+          marginTop: 5,
+          justifyContent: 'space-between'
         }}
       >
+        <Text>{author}</Text>
+        <Text>{publishedAt}</Text>
         <Pressable
           onPress={() => handleShare()} // Funkcja po kliknięciu
         >

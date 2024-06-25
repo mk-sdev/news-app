@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import GlobalApi from '@/Services/GlobalApi'
 import { useRouter } from 'expo-router'
+import { generateLink } from '@/utils/functions'
 
 export default function TopHeadlineSlider({newsList}) {
 
@@ -26,7 +27,7 @@ export default function TopHeadlineSlider({newsList}) {
         style={styles.itemContainer}
         onPress={() =>
           router.push(
-            `/Article?title=${item.title}&image=${item.urlToImage}&content=${item.content}&url=${item.url}`
+            generateLink(item)
           )
         }
       >
@@ -36,7 +37,8 @@ export default function TopHeadlineSlider({newsList}) {
         </View>
       </TouchableOpacity>
     ) : (
-      <Text>s</Text>
+      // <Text>s</Text>
+      null
     )
 
   }
@@ -45,6 +47,7 @@ export default function TopHeadlineSlider({newsList}) {
     <View style={styles.container}>
       <FlatList
         horizontal
+        // pagingEnabled
         showsHorizontalScrollIndicator={false}
         data={newsList}
         renderItem={renderItem}

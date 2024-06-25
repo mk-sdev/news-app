@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import React from 'react'
 import { useRouter } from 'expo-router'
+import { generateLink } from '@/utils/functions'
 
 export default function HeadlineList({ newsList }) {
 
@@ -16,12 +17,9 @@ export default function HeadlineList({ newsList }) {
 
   const renderItem = ({ item }) => {
     return item.urlToImage ? (
-      <TouchableOpacity style={styles.itemContainer}
-              onPress={() =>
-          router.push(
-            `/Article?title=${item.title}&image=${item.urlToImage}&content=${item.content}&url=${item.url}`
-          )
-        }
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() => router.push(generateLink(item))}
       >
         <Image style={styles.image} source={{ uri: item.urlToImage }} />
         <View style={styles.textContainer}>
@@ -29,12 +27,9 @@ export default function HeadlineList({ newsList }) {
         </View>
       </TouchableOpacity>
     ) : (
-      <TouchableOpacity style={styles.itemContainer}
-              onPress={() =>
-          router.push(
-            `/Article?title=${item.title}&image=${item.urlToImage}&content=${item.content}&url=${item.url}`
-          )
-        }
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() => router.push(generateLink(item))}
       >
         <View style={styles.itemContainer}>
           <View style={styles.textContainer}>

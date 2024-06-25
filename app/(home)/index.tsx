@@ -40,7 +40,7 @@ export default function Index() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Text style={styles.appName}>News</Text>
         <Entypo name="bell" size={24} color="black" />
       </View>
@@ -52,7 +52,10 @@ export default function Index() {
           <ActivityIndicator size="large" color="#0000ff" />
         </View>
       ) : (
-        <ScrollView>
+        <ScrollView
+          nestedScrollEnabled
+          // contentContainerStyle={{aspectRatio:1}} todo: change in browser
+        >
           <TopHeadlineSlider newsList={newsList} />
           <HeadlineList newsList={newsList} />
         </ScrollView>
