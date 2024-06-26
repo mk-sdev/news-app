@@ -1,3 +1,5 @@
+import {z} from 'zod'
+
 export type Category =
   | 'Latest'
   | 'World'
@@ -6,13 +8,21 @@ export type Category =
   | 'Politics'
   | 'Culture'
 
-export type News = {
-  author: string | null
-  content: string | null
-  description: string | null
-  publishedAt: string | null
-  source: { id: string | null; name: string | null }
-  title: string | null
-  url: string | null
-  urlToImage: string | null
-}
+const NewsSourceSchema = z.object({
+  id: z.string().nullable(),
+  name: z.string().nullable(),
+})
+
+const NewsSchema = z.object({
+  author: z.string().nullable(),
+  content: z.string().nullable(),
+  description: z.string().nullable(),
+  publishedAt: z.string().datetime().nullable(),
+  source: NewsSourceSchema,
+  title: z.string().nullable(),
+  url: z.string().url().nullable(),
+  urlToImage: z.string().url().nullable(),
+})
+
+// Typ wygenerowany z schematu
+export type News = z.infer<typeof NewsSchema>
