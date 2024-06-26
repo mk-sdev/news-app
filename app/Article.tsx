@@ -47,23 +47,23 @@ export default function ArticleScreen() {
   const handleShare = () => {
     console.log('ss')
     Share.share({
-      message: title + '\nRead more',
+      //@ts-ignore
+      message: url,
     })
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={{ padding: 10, paddingBottom:50 }}>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 10, paddingBottom: 50 }}>
         {title && <Text style={styles.title}>{title}</Text>}
         {urlToImage && (
           <Image source={{ uri: urlToImage }} style={styles.image} />
         )}
         <View
           style={{
-              width: '100%',
-              //   backgroundColor: 'red',
-              flexDirection: 'row',
-              marginTop: 5,
+            width: '100%',
+            //   backgroundColor: 'red',
+            flexDirection: 'row',
+            marginTop: 5,
             justifyContent: 'space-between',
             alignItems: 'center',
             paddingHorizontal: 10,
@@ -80,7 +80,9 @@ export default function ArticleScreen() {
           </Pressable>
         </View>
         {description && (
-          <Text style={{ fontSize: 18, lineHeight: 30, padding:10 }}>{description}</Text>
+          <Text style={{ fontSize: 18, lineHeight: 30, padding: 10 }}>
+            {description}
+          </Text>
         )}
         {content && (
           <Text style={styles.content}>
@@ -89,11 +91,19 @@ export default function ArticleScreen() {
         )}
         {url && (
           <Pressable onPress={handleReadMore}>
-            <Text style={{ color: Colors.primary, padding:10, fontSize: 17}}>Read More</Text>
+            <Text
+              style={{
+                color: Colors.primary,
+                padding: 10,
+                fontSize: 17,
+                textDecorationLine: 'underline',
+              }}
+            >
+              Read More
+            </Text>
           </Pressable>
         )}
       </ScrollView>
-    </SafeAreaView>
   )
 }
 

@@ -51,9 +51,9 @@ export default function Index() {
           paddingHorizontal: 20,
         }}
       >
-        <Text style={styles.appName}>Daily News</Text>
+        {/* <Text style={styles.appName}>Daily News</Text> */}
         {/* <FontAwesome name="newspaper-o" size={24} color="black" /> */}
-        <Entypo name="bell" size={24} color="black" />
+        {/* <Entypo name="bell" size={24} color="black" /> */}
       </View>
       <CategoryTextSlider
         selectCategory={category => getNewsByCategory(category)}

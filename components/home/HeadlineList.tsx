@@ -24,11 +24,16 @@ export default function HeadlineList({ newsList }: { newsList: News[] }) {
       >
         <Image style={styles.image} source={{ uri: item.urlToImage }} />
         <View style={styles.textContainer}>
-          <Text style={styles.text}>{item.title}</Text>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-
-          <Text style={{color: Colors.primary}}>{item.source.name}</Text>
-          <Text style={{color: Colors.lightGray}}>{item.publishedAt?.slice(0,10)}</Text>
+          <Text numberOfLines={3} style={styles.text}>
+            {item.title}
+          </Text>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <Text style={{ color: Colors.primary }}>{item.source.name}</Text>
+            <Text style={{ color: Colors.lightGray }}>
+              {item.publishedAt?.slice(0, 10)}
+            </Text>
           </View>
         </View>
       </TouchableOpacity>
