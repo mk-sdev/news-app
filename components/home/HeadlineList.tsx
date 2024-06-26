@@ -10,6 +10,7 @@ import React from 'react'
 import { useRouter } from 'expo-router'
 import { generateLink } from '@/utils/functions'
 import { News } from '@/utils/types'
+import { Colors } from '@/constants/Colors'
 
 export default function HeadlineList({ newsList }: { newsList: News[] }) {
   const router = useRouter()
@@ -17,24 +18,17 @@ export default function HeadlineList({ newsList }: { newsList: News[] }) {
   const renderItem = ({ item }: { item: News }) => {
     return item.urlToImage ? (
       <TouchableOpacity
+        activeOpacity={0.8}
         style={styles.itemContainer}
         onPress={() => router.push(generateLink(item))}
       >
         <Image style={styles.image} source={{ uri: item.urlToImage }} />
         <View style={styles.textContainer}>
           <Text style={styles.text}>{item.title}</Text>
+          <Text style={{color: Colors.primary}}>{item.source.name}</Text>
         </View>
       </TouchableOpacity>
-    ) : (
-      <TouchableOpacity
-        style={styles.itemContainer}
-        onPress={() => router.push(generateLink(item))}
-      >
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>{item.title}</Text>
-        </View>
-      </TouchableOpacity>
-    )
+    ) : null
   }
 
   return (
@@ -51,7 +45,7 @@ export default function HeadlineList({ newsList }: { newsList: News[] }) {
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
-    marginLeft: 10,
+    margin: 10,
   },
   itemContainer: {
     flexDirection: 'row',
@@ -60,7 +54,7 @@ const styles = StyleSheet.create({
     height: 100,
     backgroundColor: 'white',
     marginBottom: 5,
-    borderRadius: 10,
+    borderRadius: 5,
     overflow: 'hidden',
     padding: 10,
     shadowColor: '#000',
@@ -70,14 +64,18 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   image: {
-    width: 80,
-    height: 80,
-    borderRadius: 10,
+    width: 85,
+    height: 85,
+    borderRadius: 5,
     marginRight: 10,
+    marginLeft:-2
   },
   textContainer: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    // backgroundColor: 'red',
+    height: '100%'
+    // alignItems: 'center',
   },
   text: {
     fontSize: 16,

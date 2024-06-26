@@ -14,6 +14,7 @@ import TopHeadlineSlider from '@/components/home/TopHeadlineSlider'
 import HeadlineList from '@/components/home/HeadlineList'
 import GlobalApi from '@/Services/GlobalApi'
 import { Category } from '@/utils/types'
+import { FontAwesome } from '@expo/vector-icons'
 
 export default function Index() {
   const [newsList, setNewsList] = useState([])
@@ -32,7 +33,7 @@ export default function Index() {
   const getNewsByCategory = async (cat: Category) => {
     try {
       setLoading(true)
-      const result:any = (await GlobalApi.getByCategory(cat)).data
+      const result: any = (await GlobalApi.getByCategory(cat)).data
       setNewsList(result.articles)
       console.log(result.articles)
     } catch (e) {
@@ -41,8 +42,17 @@ export default function Index() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Text style={styles.appName}>News</Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          height: 50,
+          paddingHorizontal: 20,
+        }}
+      >
+        <Text style={styles.appName}>Daily News</Text>
+        {/* <FontAwesome name="newspaper-o" size={24} color="black" /> */}
         <Entypo name="bell" size={24} color="black" />
       </View>
       <CategoryTextSlider
@@ -71,7 +81,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.primary,
   },
-  container:{
-    
-  }
+  container: {},
 })

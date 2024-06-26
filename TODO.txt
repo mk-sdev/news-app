@@ -1,6 +1,7 @@
 -stylowanie
 -unistyles i native wind
--typescript
 -mmkv zapisane pytania
 -searchbar
 -testy
+
+- ###typescript 

@@ -16,10 +16,17 @@ import { News } from '@/utils/types'
 // import { Share } from 'expo-sharing'
 
 export default function ArticleScreen() {
-  const {author, title, urlToImage, content, url, publishedAt, description }:Partial<Omit<News, 'source' >> =
-    useLocalSearchParams()
-    
-  const removeLastChars = (str:string) => {
+  const {
+    author,
+    title,
+    urlToImage,
+    content,
+    url,
+    publishedAt,
+    description,
+  }: Partial<Omit<News, 'source'>> = useLocalSearchParams()
+
+  const removeLastChars = (str: string) => {
     if (str.length > 15) {
       return str.slice(0, -15)
     } else {
@@ -44,7 +51,9 @@ export default function ArticleScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {urlToImage && <Image source={{ uri: urlToImage }} style={styles.image} />}
+      {urlToImage && (
+        <Image source={{ uri: urlToImage }} style={styles.image} />
+      )}
       <View
         style={{
           width: '90%',

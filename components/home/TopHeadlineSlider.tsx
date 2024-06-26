@@ -50,6 +50,9 @@ export default function TopHeadlineSlider({newsList}:{newsList: News[]}) {
       <FlatList
         horizontal
         // pagingEnabled
+        contentContainerStyle={{
+          paddingLeft: 10,
+        }}
         showsHorizontalScrollIndicator={false}
         data={newsList}
         renderItem={renderItem}
@@ -63,7 +66,6 @@ export default function TopHeadlineSlider({newsList}:{newsList: News[]}) {
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
-    marginLeft: 10, 
   },
   itemContainer: {
     width: Dimensions.get('window').width * 0.8,
