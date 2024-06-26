@@ -67,7 +67,9 @@ export default function Index() {
           nestedScrollEnabled
           // contentContainerStyle={{aspectRatio:1}} todo: change in browser
         >
-          <TopHeadlineSlider newsList={newsList} />
+          <TopHeadlineSlider
+            newsList={newsList.filter((_, index) => (index + 1) % 10 === 0)}
+          />
           <HeadlineList newsList={newsList} />
         </ScrollView>
       )}

@@ -11,7 +11,7 @@ import 'react-native-reanimated'
 import { Entypo } from '@expo/vector-icons'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import { FontAwesome } from '@expo/vector-icons'
-import {Text, View} from 'react-native'
+import { Text, TextInput, View } from 'react-native'
 import { Colors } from '@/constants/Colors'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -45,13 +45,17 @@ export default function RootLayout() {
             headerShadowVisible: false,
             headerSearchBarOptions: {
               placeholder: 'search',
-              // width: '90%'
+              onChangeText: event => console.log(event.nativeEvent.text),
             },
             headerLeft: () => (
-              <View style={{
-                flexDirection: 'row', gap: 15, alignItems: 'center'
-              }}>
-              <FontAwesome name="newspaper-o" size={24} color="black" />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  gap: 15,
+                  alignItems: 'center',
+                }}
+              >
+                <FontAwesome name="newspaper-o" size={24} color="black" />
                 <Text
                   style={{
                     fontSize: 24,
@@ -61,7 +65,6 @@ export default function RootLayout() {
                 >
                   Daily News
                 </Text>
-
               </View>
             ),
           }}
@@ -73,9 +76,9 @@ export default function RootLayout() {
             headerTitle: '',
             // headerTransparent: true,
             headerShadowVisible: false,
-            headerSearchBarOptions: {
-              placeholder: 'search',
-            },
+            // headerSearchBarOptions: {
+            //   placeholder: 'Search a fraze..',
+            // },
           }}
         />
         <Stack.Screen name="+not-found" />

@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   content: {
-    marginTop: 20,
+    marginTop: 10,
     // width: '95%',
     fontSize: 16,
     lineHeight: 30,
