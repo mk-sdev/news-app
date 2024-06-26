@@ -12,11 +12,14 @@ import {
 import { useLocalSearchParams } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Entypo } from '@expo/vector-icons'
+import { News } from '@/utils/types'
 // import { Share } from 'expo-sharing'
 
 export default function ArticleScreen() {
-  const { title, image, content, url, author, publishedAt } = useLocalSearchParams()
-  const removeLastChars = str => {
+  const {author, title, urlToImage, content, url, publishedAt, description }:Partial<Omit<News, 'source' >> =
+    useLocalSearchParams()
+    
+  const removeLastChars = (str:string) => {
     if (str.length > 15) {
       return str.slice(0, -15)
     } else {
@@ -41,14 +44,14 @@ export default function ArticleScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {image && <Image source={{ uri: image }} style={styles.image} />}
+      {urlToImage && <Image source={{ uri: urlToImage }} style={styles.image} />}
       <View
         style={{
           width: '90%',
           backgroundColor: 'transparent',
           flexDirection: 'row',
           marginTop: 5,
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
         }}
       >
         <Text>{author}</Text>
@@ -60,6 +63,7 @@ export default function ArticleScreen() {
         </Pressable>
       </View>
       {title && <Text style={styles.title}>{title}</Text>}
+      {description && <Text>{description}</Text>}
       {content && (
         <Text style={styles.content}>
           {removeLastChars(JSON.stringify(content))}

@@ -1,3 +1,5 @@
-export const generateLink=(item:unknown):string=>{
-    return  `/Article?title=${item.title}&image=${item.urlToImage}&content=${item.content}&url=${item.url}&author=${item.author}&publishedAt=${item.publishedAt}`
+import { News } from "./types"
+
+export const generateLink=(news: News):string=>{
+    return  `/Article?title=${news.title}&urlToImage=${news.urlToImage}&content=${news.content}&url=${news.url}&author=${news.author}&publishedAt=${news.publishedAt}&description=${news.description}`
 }

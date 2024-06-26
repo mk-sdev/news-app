@@ -13,6 +13,7 @@ import { Entypo } from '@expo/vector-icons'
 import TopHeadlineSlider from '@/components/home/TopHeadlineSlider'
 import HeadlineList from '@/components/home/HeadlineList'
 import GlobalApi from '@/Services/GlobalApi'
+import { Category } from '@/utils/types'
 
 export default function Index() {
   const [newsList, setNewsList] = useState([])
@@ -20,7 +21,7 @@ export default function Index() {
 
   useEffect(() => {
     // getTopHeadline()
-    getNewsByCategory('latest')
+    getNewsByCategory('Latest')
   }, [])
   useEffect(() => {
     // getTopHeadline()
@@ -28,10 +29,10 @@ export default function Index() {
     // getNewsByCategory('latest')
   }, [newsList])
 
-  const getNewsByCategory = async (cat: string) => {
+  const getNewsByCategory = async (cat: Category) => {
     try {
       setLoading(true)
-      const result = (await GlobalApi.getByCategory(cat)).data
+      const result:any = (await GlobalApi.getByCategory(cat)).data
       setNewsList(result.articles)
       console.log(result.articles)
     } catch (e) {
@@ -70,4 +71,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.primary,
   },
+  container:{
+    
+  }
 })

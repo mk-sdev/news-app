@@ -3,19 +3,18 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  Dimensions,
   FlatList,
   StyleSheet,
 } from 'react-native'
 import React from 'react'
 import { useRouter } from 'expo-router'
 import { generateLink } from '@/utils/functions'
+import { News } from '@/utils/types'
 
-export default function HeadlineList({ newsList }) {
-
+export default function HeadlineList({ newsList }: { newsList: News[] }) {
   const router = useRouter()
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: { item: News }) => {
     return item.urlToImage ? (
       <TouchableOpacity
         style={styles.itemContainer}
@@ -31,10 +30,8 @@ export default function HeadlineList({ newsList }) {
         style={styles.itemContainer}
         onPress={() => router.push(generateLink(item))}
       >
-        <View style={styles.itemContainer}>
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>{item.title}</Text>
-          </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>{item.title}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -43,7 +40,6 @@ export default function HeadlineList({ newsList }) {
   return (
     <View style={styles.container}>
       <FlatList
-        // showsVerticalScrollIndicator={false}
         data={newsList}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}

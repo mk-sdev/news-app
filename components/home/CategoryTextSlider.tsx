@@ -1,11 +1,16 @@
 import { View, Text, FlatList, Pressable, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { Colors } from '@/constants/Colors' // Ensure this path and import are correct
+import { Category } from '@/utils/types'
 
-export default function CategoryTextSlider({selectCategory}) {
+export default function CategoryTextSlider({
+  selectCategory,
+}: {
+  selectCategory: (c: Category) => void
+}) {
   const [active, setActive] = useState(1)
 
-  const categoryList = [
+  const categoryList:Array<{id: number, name: Category}> = [
     { id: 1, name: 'Latest' },
     { id: 2, name: 'World' },
     { id: 3, name: 'Sport' },
@@ -23,9 +28,12 @@ export default function CategoryTextSlider({selectCategory}) {
         keyExtractor={item => item.id.toString()}
         // contentContainerStyle={{width: '100%'}}
         renderItem={({ item }) => (
-          <Pressable onPress={() => {setActive(item.id)
-          selectCategory(item.name)
-          }}>
+          <Pressable
+            onPress={() => {
+              setActive(item.id)
+              selectCategory(item.name)
+            }}
+          >
             <Text
               style={
                 item.id === active ? styles.selectText : styles.unselectText

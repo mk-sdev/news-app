@@ -11,17 +11,19 @@ import React, { useEffect, useState } from 'react'
 import GlobalApi from '@/Services/GlobalApi'
 import { useRouter } from 'expo-router'
 import { generateLink } from '@/utils/functions'
-
-export default function TopHeadlineSlider({newsList}) {
-
+import { News } from '../../utils/types'
 
 
-  // useEffect(() => {
-  //   console.log(newsList)
-  // }, [newsList])
+export default function TopHeadlineSlider({newsList}:{newsList: News[]}) {
+
+
+
+  useEffect(() => {
+    console.log(newsList)
+  }, [newsList])
   const router = useRouter()
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: {item:News}) => {
     return item.urlToImage ? (
       <TouchableOpacity
         style={styles.itemContainer}
