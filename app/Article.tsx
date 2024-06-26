@@ -8,11 +8,13 @@ import {
   Linking,
   Share,
   Pressable,
+  ScrollView,
 } from 'react-native'
 import { useLocalSearchParams } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Entypo } from '@expo/vector-icons'
 import { News } from '@/utils/types'
+import { Colors } from '@/constants/Colors'
 // import { Share } from 'expo-sharing'
 
 export default function ArticleScreen() {
@@ -51,36 +53,46 @@ export default function ArticleScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {urlToImage && (
-        <Image source={{ uri: urlToImage }} style={styles.image} />
-      )}
-      <View
-        style={{
-          width: '90%',
-          backgroundColor: 'transparent',
-          flexDirection: 'row',
-          marginTop: 5,
-          justifyContent: 'space-between',
-        }}
-      >
-        <Text>{author}</Text>
-        <Text>{publishedAt}</Text>
-        <Pressable
-          onPress={() => handleShare()} // Funkcja po kliknięciu
+      <ScrollView contentContainerStyle={{ padding: 10, paddingBottom:50 }}>
+        {title && <Text style={styles.title}>{title}</Text>}
+        {urlToImage && (
+          <Image source={{ uri: urlToImage }} style={styles.image} />
+        )}
+        <View
+          style={{
+              width: '100%',
+              //   backgroundColor: 'red',
+              flexDirection: 'row',
+              marginTop: 5,
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 10,
+          }}
         >
-          <Entypo name="share" size={24} color="black" />
-        </Pressable>
-      </View>
-      {title && <Text style={styles.title}>{title}</Text>}
-      {description && <Text>{description}</Text>}
-      {content && (
-        <Text style={styles.content}>
-          {removeLastChars(JSON.stringify(content))}
-        </Text>
-      )}
-      {url && (
-        <Button title="READ MORE" onPress={handleReadMore} color="#007bff" />
-      )}
+          <Text style={{ opacity: 0.5 }}>
+            {author} | {publishedAt?.slice(0, 10)}
+          </Text>
+          {/* <Text style={{ opacity: 0.5 }}>{publishedAt?.slice(0, 10)}</Text> */}
+          <Pressable
+            onPress={() => handleShare()} // Funkcja po kliknięciu
+          >
+            <Entypo name="share" size={24} color="black" />
+          </Pressable>
+        </View>
+        {description && (
+          <Text style={{ fontSize: 18, lineHeight: 30, padding:10 }}>{description}</Text>
+        )}
+        {content && (
+          <Text style={styles.content}>
+            {removeLastChars(JSON.stringify(content))}
+          </Text>
+        )}
+        {url && (
+          <Pressable onPress={handleReadMore}>
+            <Text style={{ color: Colors.primary, padding:10, fontSize: 17}}>Read More</Text>
+          </Pressable>
+        )}
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -88,23 +100,26 @@ export default function ArticleScreen() {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    padding: 10,
+    // padding: 10,
   },
   image: {
     width: '100%',
     height: 200,
     borderRadius: 10,
     marginBottom: 10,
-    marginTop: 50,
+    marginTop: 10,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
+    marginTop: 50,
   },
   content: {
     marginTop: 20,
+    // width: '95%',
     fontSize: 16,
-    lineHeight: 25,
+    lineHeight: 30,
+    paddingHorizontal: 10,
   },
 })

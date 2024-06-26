@@ -3,5 +3,6 @@
 -mmkv zapisane pytania
 -searchbar
 -testy
+-ZOD
 
 - ###typescript 
