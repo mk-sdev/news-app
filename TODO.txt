@@ -1,8 +1,8 @@
 -stylowanie
 -unistyles i native wind
 -mmkv zapisane pytania
--searchbar
 -testy
--ZOD
 
+-searchbar
+- ###ZOD
 - ###typescript 

@@ -77,14 +77,12 @@ const styles = StyleSheet.create({
     height: 85,
     borderRadius: 5,
     marginRight: 10,
-    marginLeft:-2
+    marginLeft: -2,
   },
   textContainer: {
     flex: 1,
     justifyContent: 'space-between',
-    // backgroundColor: 'red',
-    height: '100%'
-    // alignItems: 'center',
+    height: '100%',
   },
   text: {
     fontSize: 16,

@@ -1,16 +1,15 @@
+import { generateLink } from '@/utils/functions'
+import { useRouter } from 'expo-router'
+import React, { useEffect } from 'react'
 import {
-  View,
-  Text,
+  Dimensions,
   FlatList,
-  TouchableOpacity,
   Image,
   StyleSheet,
-  Dimensions,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import GlobalApi from '@/Services/GlobalApi'
-import { useRouter } from 'expo-router'
-import { generateLink } from '@/utils/functions'
 import { News } from '../../utils/types'
 
 
@@ -39,7 +38,6 @@ export default function TopHeadlineSlider({newsList}:{newsList: News[]}) {
         </View>
       </TouchableOpacity>
     ) : (
-      // <Text>s</Text>
       null
     )
 
@@ -49,7 +47,6 @@ export default function TopHeadlineSlider({newsList}:{newsList: News[]}) {
     <View style={styles.container}>
       <FlatList
         horizontal
-        // pagingEnabled
         contentContainerStyle={{
           paddingLeft: 10,
         }}
@@ -57,7 +54,6 @@ export default function TopHeadlineSlider({newsList}:{newsList: News[]}) {
         data={newsList}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
-        // contentContainerStyle={{height: '100%'}}
       />
     </View>
   )
@@ -70,7 +66,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     width: Dimensions.get('window').width * 0.8,
     height: 200,
-    backgroundColor: 'transparent', // No background color for the container
+    backgroundColor: 'transparent', 
     marginRight: 15,
     borderRadius: 10,
     overflow: 'hidden',
@@ -86,7 +82,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     padding: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },

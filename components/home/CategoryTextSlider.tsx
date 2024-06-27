@@ -1,7 +1,7 @@
-import { View, Text, FlatList, Pressable, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
-import { Colors } from '@/constants/Colors' // Ensure this path and import are correct
+import { Colors } from '@/constants/Colors'; // Ensure this path and import are correct
 import { Category } from '@/utils/types'
+import React, { useState } from 'react'
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 
 export default function CategoryTextSlider({
   selectCategory,
@@ -10,7 +10,7 @@ export default function CategoryTextSlider({
 }) {
   const [active, setActive] = useState(1)
 
-  const categoryList:Array<{id: number, name: Category}> = [
+  const categoryList: Array<{ id: number; name: Category }> = [
     { id: 1, name: 'Latest' },
     { id: 2, name: 'World' },
     { id: 3, name: 'Sport' },
@@ -27,10 +27,8 @@ export default function CategoryTextSlider({
         data={categoryList}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={{
-          
           paddingLeft: 20,
-          paddingBottom: 10
-
+          paddingBottom: 10,
         }}
         renderItem={({ item }) => (
           <Pressable
@@ -57,13 +55,13 @@ const styles = StyleSheet.create({
   unselectText: {
     marginRight: 15,
     fontSize: 17,
-    fontWeight: 'bold', // Example weight, you can change this as needed
-    color: Colors.gray, // Use `color` to set the text color
+    fontWeight: 'bold', 
+    color: Colors.gray, 
   },
   selectText: {
     marginRight: 15,
     fontSize: 17,
-    color: Colors.primary, // Use `color` to set the text color
-    fontWeight: 'bold', // Example weight, you can change this as needed
+    color: Colors.primary, 
+    fontWeight: 'bold', 
   },
 })
