@@ -1,21 +1,19 @@
+import { Colors } from '@/constants/Colors'
+import { News } from '@/utils/types'
+import { Entypo } from '@expo/vector-icons'
+import { useLocalSearchParams } from 'expo-router'
 import React from 'react'
 import {
-  View,
-  Text,
   Image,
-  StyleSheet,
-  Button,
   Linking,
-  Share,
   Pressable,
   ScrollView,
+  Share,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native'
-import { useLocalSearchParams } from 'expo-router'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { Entypo } from '@expo/vector-icons'
-import { News } from '@/utils/types'
-import { Colors } from '@/constants/Colors'
-// import { Share } from 'expo-sharing'
+
 
 export default function ArticleScreen() {
   const {
@@ -53,64 +51,38 @@ export default function ArticleScreen() {
   }
 
   return (
-      <ScrollView contentContainerStyle={{ paddingHorizontal: 10, paddingBottom: 50 }}>
-        {title && <Text style={styles.title}>{title}</Text>}
-        {urlToImage && (
-          <Image source={{ uri: urlToImage }} style={styles.image} />
-        )}
-        <View
-          style={{
-            width: '100%',
-            //   backgroundColor: 'red',
-            flexDirection: 'row',
-            marginTop: 5,
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingHorizontal: 10,
-          }}
-        >
-          <Text style={{ opacity: 0.5 }}>
-            {author} | {publishedAt?.slice(0, 10)}
-          </Text>
-          {/* <Text style={{ opacity: 0.5 }}>{publishedAt?.slice(0, 10)}</Text> */}
-          <Pressable
-            onPress={() => handleShare()} // Funkcja po kliknięciu
-          >
-            <Entypo name="share" size={24} color="black" />
-          </Pressable>
-        </View>
-        {description && (
-          <Text style={{ fontSize: 18, lineHeight: 30, padding: 10 }}>
-            {description}
-          </Text>
-        )}
-        {content && (
-          <Text style={styles.content}>
-            {removeLastChars(JSON.stringify(content))}
-          </Text>
-        )}
-        {url && (
-          <Pressable onPress={handleReadMore}>
-            <Text
-              style={{
-                color: Colors.primary,
-                padding: 10,
-                fontSize: 17,
-                textDecorationLine: 'underline',
-              }}
-            >
-              Read More
-            </Text>
-          </Pressable>
-        )}
-      </ScrollView>
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      {title && <Text style={styles.title}>{title}</Text>}
+      {urlToImage && (
+        <Image source={{ uri: urlToImage }} style={styles.image} />
+      )}
+      <View style={styles.infoContainer}>
+        <Text style={styles.author}>
+          {author} | {publishedAt?.slice(0, 10)}
+        </Text>
+        <Pressable onPress={handleShare}>
+          <Entypo name="share" size={24} color="black" />
+        </Pressable>
+      </View>
+      {description && <Text style={styles.description}>{description}</Text>}
+      {content && (
+        <Text style={styles.content}>
+          {removeLastChars(JSON.stringify(content))}
+        </Text>
+      )}
+      {url && (
+        <Pressable onPress={handleReadMore}>
+          <Text style={styles.readMore}>Read More</Text>
+        </Pressable>
+      )}
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    // padding: 10,
+  scrollViewContent: {
+    paddingHorizontal: 10,
+    paddingBottom: 50,
   },
   image: {
     width: '100%',
@@ -125,11 +97,32 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 50,
   },
+  infoContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    marginTop: 5,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+  },
+  author: {
+    opacity: 0.5,
+  },
+  description: {
+    fontSize: 18,
+    lineHeight: 30,
+    padding: 10,
+  },
   content: {
     marginTop: 10,
-    // width: '95%',
     fontSize: 16,
     lineHeight: 30,
     paddingHorizontal: 10,
+  },
+  readMore: {
+    color: Colors.primary,
+    padding: 10,
+    fontSize: 17,
+    textDecorationLine: 'underline',
   },
 })

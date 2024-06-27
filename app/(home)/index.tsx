@@ -1,33 +1,22 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  ActivityIndicator,
-} from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import CategoryTextSlider from '@/components/home/CategoryTextSlider'
-import { Colors } from '@/constants/Colors'
-import { Entypo } from '@expo/vector-icons'
-import TopHeadlineSlider from '@/components/home/TopHeadlineSlider'
 import HeadlineList from '@/components/home/HeadlineList'
+import TopHeadlineSlider from '@/components/home/TopHeadlineSlider'
+import { Colors } from '@/constants/Colors'
 import GlobalApi from '@/Services/GlobalApi'
 import { Category } from '@/utils/types'
-import { FontAwesome } from '@expo/vector-icons'
+import React, { useEffect, useState } from 'react'
+import { ActivityIndicator, ScrollView, StyleSheet, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Index() {
   const [newsList, setNewsList] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // getTopHeadline()
     getNewsByCategory('Latest')
   }, [])
   useEffect(() => {
-    // getTopHeadline()
     setLoading(false)
-    // getNewsByCategory('latest')
   }, [newsList])
 
   const getNewsByCategory = async (cat: Category) => {
@@ -50,11 +39,7 @@ export default function Index() {
           height: 50,
           paddingHorizontal: 20,
         }}
-      >
-        {/* <Text style={styles.appName}>Daily News</Text> */}
-        {/* <FontAwesome name="newspaper-o" size={24} color="black" /> */}
-        {/* <Entypo name="bell" size={24} color="black" /> */}
-      </View>
+      ></View>
       <CategoryTextSlider
         selectCategory={category => getNewsByCategory(category)}
       />
@@ -63,10 +48,7 @@ export default function Index() {
           <ActivityIndicator size="large" color="#0000ff" />
         </View>
       ) : (
-        <ScrollView
-          nestedScrollEnabled
-          // contentContainerStyle={{aspectRatio:1}} todo: change in browser
-        >
+        <ScrollView nestedScrollEnabled>
           <TopHeadlineSlider
             newsList={newsList.filter((_, index) => (index + 1) % 10 === 0)}
           />
