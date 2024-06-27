@@ -1,18 +1,18 @@
 import { Category } from '@/utils/types'
 import { create } from 'apisauce'
-
+import {API_KEY} from '@env'
 const api = create({
   baseURL:
     'https://newsapi.org/v2/',
 })
 
-const apiKey = '?country=us&apiKey=87bc66d4570d4b819cb5c2f5ffefa162'
+const apiKey = '87bc66d4570d4b819cb5c2f5ffefa162'
 
-const getTopHeadline = api.get('/top-headlines'+apiKey)
+const getTopHeadline = api.get('/top-headlines?country=us&apiKey=' + apiKey)
 
 const getByCategory = (category: Category | string) =>
   api.get(
-    '/everything?q=' + category + '&apiKey=87bc66d4570d4b819cb5c2f5ffefa162'
+    '/everything?q=' + category + '&apiKey='+apiKey
   )
 
 export default {getTopHeadline, getByCategory}
