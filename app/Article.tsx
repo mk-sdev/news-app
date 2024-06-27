@@ -15,6 +15,14 @@ import {
 } from 'react-native'
 
 
+export const removeLastChars = (str: string) => {
+  if (str.length > 15) {
+    return str.slice(0, -15)
+  } else {
+    return ''
+  }
+}
+
 export default function ArticleScreen() {
   const {
     author,
@@ -26,13 +34,6 @@ export default function ArticleScreen() {
     description,
   }: Partial<Omit<News, 'source'>> = useLocalSearchParams()
 
-  const removeLastChars = (str: string) => {
-    if (str.length > 15) {
-      return str.slice(0, -15)
-    } else {
-      return ''
-    }
-  }
 
   const handleReadMore = () => {
     if (url) {

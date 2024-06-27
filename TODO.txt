@@ -3,6 +3,8 @@
 -mmkv zapisane pytania
 -testy
 
+-env
+-axios
 -searchbar
 - ###ZOD
 - ###typescript 

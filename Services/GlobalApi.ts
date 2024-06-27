@@ -1,8 +1,6 @@
-// showLastCommitMessageForThisLibrary.js
 import { Category } from '@/utils/types'
 import { create } from 'apisauce'
 
-// define the api
 const api = create({
   baseURL:
     'https://newsapi.org/v2/',
