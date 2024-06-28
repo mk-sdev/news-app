@@ -53,8 +53,8 @@ export default function HeadlineList({ newsList }: { newsList: News[] }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
-    margin: 10,
+    marginTop: 1,
+    margin: 1,
   },
   itemContainer: {
     flexDirection: 'row',

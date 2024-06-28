@@ -74,7 +74,7 @@ export default function RootLayout() {
     <ThemeProvider value={theme}>
       <Stack>
         <Stack.Screen name="(home)" options={homeScreenOptions} />
-        <Stack.Screen name="article" options={articleScreenOptions} />
+        <Stack.Screen name="Article" options={articleScreenOptions} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>

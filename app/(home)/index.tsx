@@ -5,7 +5,7 @@ import { Colors } from '@/constants/Colors'
 import GlobalApi from '@/Services/GlobalApi'
 import { Category } from '@/utils/types'
 import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, ScrollView, StyleSheet, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, View, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Index() {
@@ -15,6 +15,7 @@ export default function Index() {
   useEffect(() => {
     getNewsByCategory('Latest')
   }, [])
+
   useEffect(() => {
     setLoading(false)
   }, [newsList])
@@ -29,6 +30,7 @@ export default function Index() {
       console.error('Error fetching top headlines:', e)
     }
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -48,12 +50,17 @@ export default function Index() {
           <ActivityIndicator size="large" color="#0000ff" />
         </View>
       ) : (
-        <ScrollView nestedScrollEnabled>
-          <TopHeadlineSlider
-            newsList={newsList.filter((_, index) => (index + 1) % 10 === 0)}
-          />
-          <HeadlineList newsList={newsList} />
-        </ScrollView>
+        <FlatList
+          ListHeaderComponent={
+            <TopHeadlineSlider
+              newsList={newsList.filter((_, index) => (index + 1) % 10 === 0)}
+            />
+          }
+          data={newsList}
+          renderItem={({ item }) => <HeadlineList newsList={[item]} />}
+          keyExtractor={(item, index) => index.toString()}
+          nestedScrollEnabled
+        />
       )}
     </SafeAreaView>
   )
